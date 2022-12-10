@@ -49,7 +49,7 @@
         </span>
       </div>
 
-      <p>原型和原型链</p>
+      <p title="原型和原型链">原型和原型链</p>
     </div>
   </div>
 </template>
@@ -147,6 +147,13 @@ export default {
       margin-top: 17px;
       font-size: 17px;
       text-align: center;
+      text-overflow: -o-ellipsis-lastline;
+      overflow: hidden; //溢出内容隐藏
+      text-overflow: ellipsis; //文本溢出部分用省略号表示
+      display: -webkit-box; //特别显示模式
+      -webkit-line-clamp: 1; //行数
+      line-clamp: 1;
+      -webkit-box-orient: vertical; //盒子中内容竖直排列
     }
   }
 }

@@ -10,8 +10,16 @@
       </ul>
       <!-- 搜索框 -->
       <div class="search">
-        <el-input placeholder="请输入内容" class="input-with-select">
-          <el-button @click="goSearch" slot="append" icon="el-icon-search"></el-button>
+        <el-input
+          v-model="keyword"
+          placeholder="请输入内容"
+          class="input-with-select"
+        >
+          <el-button
+            @click="goSearch"
+            slot="append"
+            icon="el-icon-search"
+          ></el-button>
         </el-input>
       </div>
     </div>
@@ -23,7 +31,9 @@
 export default {
   name: "HeaderComponent",
   data() {
-    return {};
+    return {
+      keyword: "",
+    };
   },
   computed: {
     //获取时间
@@ -46,9 +56,14 @@ export default {
     },
 
     //前往搜索页
-    goSearch(){
-      this.$router.push({path:"/search"})
-    }
+    goSearch() {
+      //代表的是如果query参数也带过去
+        let location = {
+          name: "搜索结果",
+          query: { keyword: this.keyword || undefined },
+        }
+        this.$router.push(location)
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -109,7 +124,7 @@ export default {
         color: #cd5360;
       }
     }
-    .search{
+    .search {
       width: 1475px;
       display: flex;
       justify-content: flex-end;

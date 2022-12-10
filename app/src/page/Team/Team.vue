@@ -2,7 +2,7 @@
   <div class="Team">
     <div class="container">
         <Guestbook style="margin-bottom: 50px"></Guestbook>
-        <JoinForm></JoinForm>
+        <JoinForm @register="register"></JoinForm>
     </div>
   </div>
 </template>
@@ -20,7 +20,11 @@ export default {
     Guestbook,
     JoinForm
   },
-  methods: {},
+  methods: {
+    register(v){
+      console.log(v);
+    }
+  },
 };
 </script>
 

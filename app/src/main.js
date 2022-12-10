@@ -34,9 +34,6 @@ Vue.use(VueRouter)
 //引入Vuex
 import store from './store'
 
-//引入swiper样式
-import 'swiper/css/swiper.css'
-
 //创建vue实例对象---vm
 // eslint-disable-next-line no-unused-vars
 const vm = new Vue({

@@ -1,13 +1,14 @@
 <template>
+  <!-- :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload" -->
   <div class="JoinForm">
     <el-dialog title="填写信息" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
+      <el-form :rules="rules" ref="ruleForm" :model="form">
+        <!-- 头像 -->
         <el-upload
           class="avatar-uploader"
           action="https://jsonplaceholder.typicode.com/posts/"
           :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
         >
           <img v-if="imageUrl" :src="imageUrl" class="avatar" />
           <div v-else class="loader-icon">
@@ -15,22 +16,51 @@
             <span>头像上传</span>
           </div>
         </el-upload>
-        <el-form-item label="姓名:">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <!-- 姓名 -->
+        <el-form-item label="姓名:" prop="name">
+          <el-input
+            type="text"
+            v-model="form.name"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="学号:">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <!-- 学号 -->
+        <el-form-item label="学号:" prop="stuId">
+          <el-input
+            type="text"
+            v-model="form.stuId"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="班级:">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <!-- 班级 -->
+        <el-form-item label="班级:" prop="class">
+          <el-input
+            type="text"
+            v-model="form.class"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
-        <el-form-item label="邮箱:">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <!-- 密码 -->
+        <el-form-item label="密码:" prop="password">
+          <el-input
+            type="password"
+            v-model="form.password"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <!-- 确认密码 -->
+        <el-form-item label="确认密码:" prop="againPass">
+          <el-input
+            type="password"
+            v-model="form.againPass"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
       </el-form>
+
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false"
+        <el-button type="primary" @click="submitForm('ruleForm')"
           >确 定</el-button
         >
       </div>
@@ -52,18 +82,93 @@
 export default {
   name: "JoinForm",
   data() {
+    // 姓名
+    let checkName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("姓名不能为空"));
+      } else {
+        callback();
+      }
+    };
+    // 班级
+    let checkClass = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("班级不能为空"));
+      } else {
+        callback();
+      }
+    };
+    // 学号
+    let checkStuId = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("学号不能为空"));
+      } else {
+        callback();
+      }
+    };
+    //密码
+    let checkPassword = (rule, value, callback) => {
+      let reg =
+        /^(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{6,20}$/;
+      if (!value) {
+        return callback(new Error("请输入密码"));
+      } else if (!reg.test(value)) {
+        return callback(new Error("至少包含数字跟字母,可以带字符,长度6-20"));
+      } else {
+        if (this.form.againPass !== "") {
+          this.$refs.ruleForm.validateField("againPass");
+        }
+        callback();
+      }
+    };
+    //确认密码
+    let checkAgainPass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.form.password) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
     return {
+      imageUrl: "",
       dialogFormVisible: false,
       form: {
-        name: "",
-        class: "",
-        stuId: "",
+        name: "", // 名字
+        class: "", // 班级
+        stuId: "", // 学号
+        password: "", //密码
+        againPass: "", //确认密码
       },
-      imageUrl:""
+      // 表单规则
+      rules: {
+        name: [{ validator: checkName, trigger: "blur" }], // 名字
+        class: [{ validator: checkClass, trigger: "blur" }], // 班级
+        stuId: [{ validator: checkStuId, trigger: "blur" }], //学号
+        password: [{ validator: checkPassword, trigger: "blur" }], //密码
+        againPass: [{ validator: checkAgainPass, trigger: "blur" }], //确认密码
+      },
     };
   },
   components: {},
-  methods: {},
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$emit("register", {
+            name: this.form.name,
+            class: this.form.class,
+            stuId: this.form.stuId,
+            password: this.form.password,
+          });
+          this.dialogFormVisible = false;
+        } else {
+          return false;
+        }
+      });
+    },
+  },
 };
 </script>
 
@@ -74,8 +179,8 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-.avatar-uploader{
-  margin-bottom:40px ;
+.avatar-uploader {
+  margin-bottom: 40px;
 }
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
@@ -120,18 +225,24 @@ export default {
   align-items: center;
 }
 .el-form-item {
-  width: 300px;
+  width: 320px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 .el-form-item__content {
   width: 230px !important;
+  justify-self: flex-end;
 }
 
 .el-input__inner {
   width: 230px !important;
+}
+.el-form-item::after,
+.el-form-item::before {
+  content: none;
 }
 </style>
 

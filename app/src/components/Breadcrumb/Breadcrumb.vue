@@ -3,7 +3,7 @@
     <span>你当前的位置：</span> 
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>文章</el-breadcrumb-item>
+      <el-breadcrumb-item>{{this.$route.name}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>

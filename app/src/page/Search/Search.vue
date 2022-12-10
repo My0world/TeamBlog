@@ -11,12 +11,32 @@ import SearchFloor from "./components/SearchFloor";
 export default {
   name: "Search",
   data() {
-    return {};
+    return {
+      searchParams:""
+    };
+  },
+  watch:{
+    // 监听路由信息
+    $route(){
+      this.searchParams = this.$route.query.keyword
+      this.getData()
+    }
   },
   components: {
     SearchFloor,
   },
-  methods: {},
+  methods: {
+
+    // 获取数据
+    getData(){
+      //发送请求
+    }
+  },
+  mounted(){
+    this.searchParams = this.$route.query.keyword
+    this.getData()
+  }
+
 };
 </script>
 

@@ -7,7 +7,7 @@
         fit="cover"
       ></el-image>
       <div class="brightness"></div>
-      <p> 
+      <p title="游戏壁纸"> 
         游戏壁纸
       </p>
       <span>99+</span>

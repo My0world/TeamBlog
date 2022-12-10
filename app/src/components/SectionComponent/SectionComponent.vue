@@ -32,7 +32,7 @@
             fill="#4dac98"
           ></path>
         </svg>
-        <a>星空</a>
+        <a title="星空">星空</a>
         <span class="score"
           ><svg
             t="1670072535750"

@@ -9,7 +9,7 @@
         ></el-image>
       </div>
       <div class="content">
-        <p class="title">原型和原型链</p>
+        <p title="原型和原型链" class="title">原型和原型链</p>
         <p class="text">
           微信小程序是一种全新的连接用户与服务的方式，它可以在微信内被便捷地获取和传播，同时具有出色的使用体验。本文将从注册，到语法，到应用，深层次剖析小程序的使用。
         </p>
@@ -122,8 +122,8 @@ export default {
         height: 130px !important;
         transition-duration: 0.3s;
       }
-      &:hover{
-        .cover{
+      &:hover {
+        .cover {
           width: 200px !important;
           height: 170px !important;
         }
@@ -143,10 +143,17 @@ export default {
         text-align: left;
         font-size: 25px;
         color: black;
-        transition-duration: .3s;
+        text-overflow: -o-ellipsis-lastline;
+        overflow: hidden; //溢出内容隐藏
+        text-overflow: ellipsis; //文本溢出部分用省略号表示
+        display: -webkit-box; //特别显示模式
+        -webkit-line-clamp: 1; //行数
+        line-clamp: 1;
+        -webkit-box-orient: vertical; //盒子中内容竖直排列
+        transition-duration: 0.3s;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
           color: #4dac98;
         }
       }
