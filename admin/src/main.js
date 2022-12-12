@@ -10,6 +10,14 @@ import 'element-ui/lib/theme-chalk/index.css';
 //使用插件
 Vue.use(ElementUI);
 
+// 引入组件
+import NavCompontent from "./components/NavCompontent/NavCompontent"
+import ListView from "./components/ListView/ListView"
+
+//使用
+Vue.component("NavCompontent",NavCompontent)//导航
+Vue.component("ListView",ListView)//导航
+
 
 // 引入vue-router
 import VueRouter from 'vue-router'

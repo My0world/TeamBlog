@@ -4,7 +4,10 @@
 import VueRouter from 'vue-router'
 
 //引入页面组件
-import Home from '../page/Home/Home.vue'
+import Login from '../page/Login/Login.vue'
+import Mine from '../page/Mine/Mine.vue'
+import Page from '../page/Page/Page.vue'
+import Image from '../page/Image/Image.vue'
 
 
 
@@ -14,11 +17,32 @@ export default new VueRouter({
     routes: [
 
         //使用路由组件
-        { path: '/', redirect: '/home' },
+        { path: '/', redirect: '/login' },
         {
-            name: '首页',//名字
-            path: '/home',//路径
-            component: Home,//组件名称
+            name: '登录',//名字
+            path: '/login',//路径
+            component: Login,//组件名称
+            meta: {},//路由元信息
+            children: [],//二级路由
+        },
+        {
+            name: '个人信息',//名字
+            path: '/mine',//路径
+            component: Mine,//组件名称
+            meta: {},//路由元信息
+            children: [],//二级路由
+        },
+        {
+            name: '文章',//名字
+            path: '/page',//路径
+            component: Page,//组件名称
+            meta: {},//路由元信息
+            children: [],//二级路由
+        },
+        {
+            name: '图片',//名字
+            path: '/image',//路径
+            component: Image,//组件名称
             meta: {},//路由元信息
             children: [],//二级路由
         }

@@ -1,5 +1,5 @@
 <template>
-    <div class="Home">
+    <div class="Image">
         
     </div>
 </template>
@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        name: "Home",
+        name: "Image",
         data() {
             return {}
         },
@@ -18,7 +18,7 @@
 
 
 <style>
-    .Home{
+    .Image{
         
     }
 </style>
