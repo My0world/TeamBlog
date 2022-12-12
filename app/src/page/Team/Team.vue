@@ -21,6 +21,7 @@ export default {
     JoinForm
   },
   methods: {
+    //注册
     register(v){
       console.log(v);
     }

@@ -8,7 +8,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 //引入配置文件
-import Search from './Search'
+import Login from './Login'
 
 
 //创建并暴露store
@@ -16,6 +16,6 @@ export default new Vuex.Store({
 
     // 实现Vuex仓库模块式开发存储数据
     modules: {
-        Search,
+        Login,
     }
 })

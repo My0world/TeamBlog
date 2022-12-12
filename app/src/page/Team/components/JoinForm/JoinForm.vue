@@ -5,7 +5,7 @@
     <el-dialog title="填写信息" :visible.sync="dialogFormVisible">
       <el-form :rules="rules" ref="ruleForm" :model="form">
         <!-- 头像 -->
-        <el-upload
+        <!-- <el-upload
           class="avatar-uploader"
           action="https://jsonplaceholder.typicode.com/posts/"
           :show-file-list="false"
@@ -15,7 +15,7 @@
             <i class="el-icon-plus avatar-uploader-icon"></i>
             <span>头像上传</span>
           </div>
-        </el-upload>
+        </el-upload> -->
         <!-- 姓名 -->
         <el-form-item label="姓名:" prop="name">
           <el-input
@@ -153,6 +153,7 @@ export default {
   },
   components: {},
   methods: {
+    // 提交
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {

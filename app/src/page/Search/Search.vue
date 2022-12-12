@@ -7,18 +7,20 @@
 
 
 <script>
+
+
 import SearchFloor from "./components/SearchFloor";
 export default {
   name: "Search",
   data() {
     return {
-      searchParams:""
+      keyword:""
     };
   },
   watch:{
     // 监听路由信息
     $route(){
-      this.searchParams = this.$route.query.keyword
+      this.keyword = this.$route.query.keyword
       this.getData()
     }
   },
@@ -30,10 +32,11 @@ export default {
     // 获取数据
     getData(){
       //发送请求
+      this.$store.dispatch("search/getSearchList", this.keyword);
     }
   },
   mounted(){
-    this.searchParams = this.$route.query.keyword
+    this.keyword = this.$route.query.keyword
     this.getData()
   }
 
