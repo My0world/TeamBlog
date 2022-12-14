@@ -11,7 +11,7 @@ const search = {
         //发送请求获取搜索结果
         async getSearchList(context, value = "") {
 
-            let result = await reqGetSearchInfo(value)
+            let result = await reqGetSearchInfo(value.trim())
             if (result.code === 200) {
                 await context.dispatch('getUserList')
                 context.commit("GETSEARCHLIST", result.data)
@@ -48,6 +48,9 @@ const search = {
         resultList(state) {
             let result = {}
             let reslist = []
+            if(!state.searchList){
+                return []
+            }
             for (let i = 0; i < state.searchList.length; i++) {
                 state.searchList[i].time = state.searchList[i].time.slice(0, 10)
                 let index = state.userList.findIndex(item => {
