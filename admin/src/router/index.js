@@ -7,7 +7,7 @@ import VueRouter from 'vue-router'
 import Login from '../page/Login/Login.vue'
 import Mine from '../page/Mine/Mine.vue'
 import Page from '../page/Page/Page.vue'
-import Image from '../page/Image/Image.vue'
+import Picture from '../page/Picture/Picture.vue'
 
 
 
@@ -41,8 +41,8 @@ export default new VueRouter({
         },
         {
             name: '图片',//名字
-            path: '/image',//路径
-            component: Image,//组件名称
+            path: '/picture',//路径
+            component: Picture,//组件名称
             meta: {},//路由元信息
             children: [],//二级路由
         }

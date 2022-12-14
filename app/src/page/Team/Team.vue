@@ -1,30 +1,51 @@
 <template>
   <div class="Team">
     <div class="container">
-        <Guestbook style="margin-bottom: 50px"></Guestbook>
-        <JoinForm @register="register"></JoinForm>
+      <Guestbook
+        v-for="i in userList"
+        :key="i.stuId"
+        :imgURL="i.iconUrl"
+        :name="i.name"
+        :stuid="i.stuId"
+        :stuclass="i.stuClass"
+        :content="i.guestBook"
+        style="margin-bottom: 50px"
+      ></Guestbook>
+      <JoinForm @register="register"></JoinForm>
     </div>
   </div>
 </template>
 
 
 <script>
-import Guestbook from './components/Guestbook'
-import JoinForm from './components/JoinForm/JoinForm'
+import { mapState } from "vuex";
+import Guestbook from "./components/Guestbook";
+import JoinForm from "./components/JoinForm/JoinForm";
 export default {
   name: "Team",
   data() {
     return {};
   },
+  computed: {
+    ...mapState("Team", ["userList"]),
+  },
   components: {
     Guestbook,
-    JoinForm
+    JoinForm,
   },
   methods: {
     //注册
-    register(v){
-      console.log(v);
-    }
+    register(v) {
+      v.stuId = parseInt(v.stuId);
+      this.$store.dispatch("Team/register", v);
+    },
+    //获取用户信息
+    getData() {
+      this.$store.dispatch("Team/getUserList");
+    },
+  },
+  mounted() {
+    this.getData();
   },
 };
 </script>

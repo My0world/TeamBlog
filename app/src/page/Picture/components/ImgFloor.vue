@@ -4,11 +4,11 @@
       <div class="cover">
         <el-image
           class="img"
-          :src="require('@/assets/2008030818/page/01.png')"
+          :src="coverUrl"
           fit="cover"
         >
         </el-image>
-        <img src="@/assets/2008030818/user/01.jpg" class="touxiang" />
+        <img :src="iconUrl" class="touxiang" />
         <span class="score"
           ><svg
             t="1670072535750"
@@ -25,7 +25,7 @@
               p-id="2480"
               fill="#d81e06"
             ></path></svg
-          >2551
+          >{{score}}
         </span>
         <span class="time">
           <svg
@@ -45,11 +45,11 @@
               p-id="2705"
             ></path>
           </svg>
-          2022-12-03
+          {{time}}
         </span>
       </div>
 
-      <p title="原型和原型链">原型和原型链</p>
+      <p :title="title">{{title}}</p>
     </div>
   </div>
 </template>
@@ -58,6 +58,7 @@
 <script>
 export default {
   name: "ImgFloor",
+  props:["coverUrl","iconUrl","score","time","title"],
   data() {
     return {};
   },

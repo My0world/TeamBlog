@@ -10,9 +10,14 @@
         </div>
         <!-- 内容 -->
         <div class="team-content">
-          <TeamFloor></TeamFloor>
-          <TeamFloor></TeamFloor>
-          <TeamFloor></TeamFloor>
+          <TeamFloor
+            v-for="i in userList"
+            :iconUrl="i.iconUrl"
+            :key="i.stuId"
+            :name="i.name"
+            :stuClass="i.stuClass"
+            :stuId="i.stuId"
+          ></TeamFloor>
         </div>
       </div>
     </div>
@@ -26,19 +31,26 @@
         </div>
         <!-- 文章集合 -->
         <div class="page-row">
-          <SmailPageFloor></SmailPageFloor>
-          <SmailPageFloor></SmailPageFloor>
-          <SmailPageFloor></SmailPageFloor>
-          <SmailPageFloor></SmailPageFloor>
-          <SmailPageFloor></SmailPageFloor>
-          <SmailPageFloor></SmailPageFloor>
+          <SmailPageFloor
+            v-for="i in PageHotList"
+            :key="i.id"
+            :coverUrl="i.coverUrl"
+            :iconUrl="i.iconUrl"
+            :score="i.score"
+            :content="i.text"
+            :time="i.time"
+            :title="i.title"
+          ></SmailPageFloor>
         </div>
         <!-- 图片集合 -->
         <div class="image-row">
-          <SmailImageFloor></SmailImageFloor>
-          <SmailImageFloor></SmailImageFloor>
-          <SmailImageFloor></SmailImageFloor>
-          <SmailImageFloor></SmailImageFloor>
+          <SmailImageFloor
+            v-for="i in PictureHotList"
+            :key="i.id"
+            :coverUrl="i.coverUrl"
+            :title="i.title"
+            :score="i.score"
+          ></SmailImageFloor>
         </div>
       </div>
     </div>
@@ -46,9 +58,9 @@
     <!-- 其他内容集合 -->
     <div class="home-Other">
       <div class="other-container">
-        <SectionComponent></SectionComponent>
-        <SectionComponent></SectionComponent>
-        <SectionComponent></SectionComponent>
+        <SectionComponent :dataList="PageLastList" title="最新文章"></SectionComponent>
+        <SectionComponent :dataList="PictureLastList" title="最新图片"></SectionComponent>
+        <SectionComponent :dataList="WeObj" title="优秀项目"></SectionComponent>
       </div>
     </div>
   </div>
@@ -56,20 +68,50 @@
 
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
 import TeamFloor from "./components/TeamFloor";
 import SmailPageFloor from "./components/SmailPageFloor";
 import SmailImageFloor from "./components/SmailImageFloor";
 export default {
   name: "Home",
   data() {
-    return {};
+    return {
+      WeObj: [
+        { id: "1", title: "后台项目", score: "99" },
+        { id: "2", title: "贪吃蛇", score: "95" },
+        { id: "3", title: "微信商店", score: "4" },
+        { id: "4", title: "扫雷", score: "94" },
+        { id: "5", title: "商店管理系统", score: "9" },
+        { id: "6", title: "个人博客", score: "9" },
+        { id: "7", title: "扫雷安卓版", score: "9" },
+      ],
+    };
+  },
+  computed: {
+    ...mapState("Home", ["userList"]),
+    ...mapGetters({ PageHotList: "Home/PageHotList" }),
+    ...mapGetters({ PictureHotList: "Home/PictureHotList" }),
+    ...mapGetters({ PageLastList: "Home/PageLastList" }),
+    ...mapGetters({ PictureLastList: "Home/PictureLastList" }),
   },
   components: {
     TeamFloor,
     SmailPageFloor,
     SmailImageFloor,
   },
-  methods: {},
+  methods: {
+    // 获取数据
+    getData() {
+      //发送请求
+      this.$store.dispatch("Home/getUserList");
+      this.$store.dispatch("Home/getHotList");
+      this.$store.dispatch("Home/getLastList");
+    },
+  },
+  mounted() {
+    this.getData();
+  },
 };
 </script>
 

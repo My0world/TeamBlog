@@ -3,14 +3,14 @@
     <div class="container">
       <el-image
         class="img"
-        :src="require('@/assets/2008030818/image/01.png')"
+        :src="coverUrl"
         fit="cover"
       ></el-image>
       <div class="brightness"></div>
-      <p title="游戏壁纸"> 
-        游戏壁纸
+      <p title="title"> 
+        {{title}}
       </p>
-      <span>99+</span>
+      <span>{{score}}</span>
     </div>
   </div>
 </template>
@@ -19,6 +19,7 @@
 <script>
 export default {
   name: "SmailImageFloor",
+  props:["coverUrl","title","score"],
   data() {
     return {};
   },

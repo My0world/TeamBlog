@@ -3,13 +3,13 @@
     <div class="container">
       <!-- 头像 -->
       <div class="imageIcon">
-        <img src="@/assets/2008030818/user/01.jpg" />
+        <img :src="iconUrl" />
       </div>
       <!-- 个人信息 -->
       <div class="personMessage">
-        <p>梁庚大</p>
-        <p>计算机系</p>
-        <p>20软件工程8班</p>
+        <p>{{name}}</p>
+        <p>{{stuId}}</p>
+        <p>{{stuClass}}</p>
       </div>
     </div>
   </div>
@@ -19,6 +19,7 @@
 <script>
 export default {
   name: "TeamFloor",
+  props:['iconUrl','name','stuId','stuClass'],
   data() {
     return {};
   },

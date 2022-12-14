@@ -5,17 +5,18 @@
     <el-dialog title="填写信息" :visible.sync="dialogFormVisible">
       <el-form :rules="rules" ref="ruleForm" :model="form">
         <!-- 头像 -->
-        <!-- <el-upload
+        <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="/upload"
           :show-file-list="false"
+          :on-success="getImageUrl"
         >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <img v-if="form.url" :src="form.url" class="avatar" />
           <div v-else class="loader-icon">
             <i class="el-icon-plus avatar-uploader-icon"></i>
             <span>头像上传</span>
           </div>
-        </el-upload> -->
+        </el-upload>
         <!-- 姓名 -->
         <el-form-item label="姓名:" prop="name">
           <el-input
@@ -99,9 +100,13 @@ export default {
       }
     };
     // 学号
+
+    let reg = /^(0|[1-9][0-9]*)$/;
     let checkStuId = (rule, value, callback) => {
       if (!value) {
         return callback(new Error("学号不能为空"));
+      } else if (!reg.test(value)) {
+        return callback(new Error("请输入正确的学号格式"));
       } else {
         callback();
       }
@@ -132,9 +137,9 @@ export default {
       }
     };
     return {
-      imageUrl: "",
       dialogFormVisible: false,
       form: {
+        url: "",
         name: "", // 名字
         class: "", // 班级
         stuId: "", // 学号
@@ -157,17 +162,32 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          if (this.form.url === "") {
+            this.form.url = "images/4d825c60-dc99-4c86-9608-61757414ee96.png";
+          }
           this.$emit("register", {
             name: this.form.name,
-            class: this.form.class,
+            stuClass: this.form.class,
             stuId: this.form.stuId,
             password: this.form.password,
+            iconUrl: this.form.url,
+            guestBook: "",
           });
+          this.form.name = "";
+          this.form.class = "";
+          this.form.stuId = "";
+          this.form.password = "";
+          this.form.url = "";
           this.dialogFormVisible = false;
         } else {
           return false;
         }
       });
+    },
+
+    //获取新的图片链接
+    getImageUrl(response) {
+      this.form.url = response.data.url;
     },
   },
 };

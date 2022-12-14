@@ -1,3 +1,5 @@
+
+ 
 // 当前这个模块：Api进行统一管理
 import apiRequests from "./ApiAjax";
 
@@ -8,4 +10,17 @@ export const reqLogin = (login) => apiRequests({
     url: "/login",
     method: "post",
     data: login
+})
+export const reqHotList = () => apiRequests({
+    url: "/detail/hot",
+    method: "get",
+})
+export const reqUserList = () => apiRequests({
+    url: "/user",
+    method: "get",
+})
+export const deleteItem = (value) => apiRequests({
+    url: "/detail",
+    method: "delete",
+    data: value
 })

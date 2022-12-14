@@ -5,8 +5,8 @@ module.exports = {
   //配置代理跨域
   devServer: {
     proxy: {
-      "/api": {
-        target: "地址",
+      "": {
+        target: 'http://localhost:8080/',
       },
     },
   },

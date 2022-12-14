@@ -13,10 +13,12 @@ Vue.use(ElementUI);
 // 引入组件
 import NavCompontent from "./components/NavCompontent/NavCompontent"
 import ListView from "./components/ListView/ListView"
+import AddView from "./components/AddView/AddView"
 
 //使用
 Vue.component("NavCompontent",NavCompontent)//导航
-Vue.component("ListView",ListView)//导航
+Vue.component("ListView",ListView)//数据
+Vue.component("AddView",AddView)//对话框
 
 
 // 引入vue-router

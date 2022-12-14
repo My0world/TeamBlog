@@ -1,17 +1,17 @@
 <template>
   <div class="Guestbook">
     <div class="message">
-      <img src="@/assets/2008030818/user/01.jpg" />
+      <img :src="imgURL" />
       <div class="table">
-        <p><strong>姓名：</strong>梁庚大</p>
-        <p><strong>学号：</strong>2008030818</p>
-        <p><strong>班级：</strong>20软件工程8班</p>
+        <p><strong>姓名：</strong>{{name}}</p>
+        <p><strong>学号：</strong>{{stuid}}</p>
+        <p><strong>班级：</strong>{{stuclass}}</p>
       </div>
     </div>
     <div class="content">
       <div class="text">
         <div>
-          asdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddddddddd
+          {{content}}
         </div>
       </div>
       <div class="bottom">
@@ -45,6 +45,7 @@
 <script>
 export default {
   name: "Guestbook",
+  props:["imgURL","name","stuid","stuclass","content"],
   data() {
     return {};
   },

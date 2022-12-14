@@ -4,10 +4,10 @@
       <div class="cover">
         <el-image
           class="img"
-          :src="require('@/assets/2008030818/page/01.png')"
+          :src="coverUrl"
           fit="cover"
         ></el-image>
-        <img src="@/assets/2008030818/user/01.jpg" class="touxiang" />
+        <img :src="iconUrl" class="touxiang" />
       </div>
       <div class="message">
         <div>
@@ -27,7 +27,7 @@
                 p-id="2480"
                 fill="#d81e06"
               ></path></svg
-            >2551</span
+            >{{score}}</span
           >
           <span class="time">
             <svg
@@ -47,12 +47,12 @@
                 p-id="2705"
               ></path>
             </svg>
-            2022-12-03
+            {{time}}
           </span>
         </div>
-        <div><a title="原型和原型链">原型和原型链</a></div>
+        <div><a :title="title">{{title}}</a></div>
         <div>
-          微信小程序是一种全新的连接用户与服务的方式，它可以在微信内被便捷地获取和传播，同时具有出色的使用体验。本文将从注册，到语法，到应用，深层次剖析小程序的使用。
+          {{content}}
         </div>
         <div>
           <a>了解更多<i class="el-icon-arrow-right"></i> </a>
@@ -66,6 +66,7 @@
 <script>
 export default {
   name: "SmailPageFloor",
+  props:["coverUrl","iconUrl","score","content","time","title"],
   data() {
     return {};
   },
@@ -95,10 +96,10 @@ export default {
       .img {
         width: 350px;
         height: 225px;
-        transition-duration: 0.3s;
+        transition-duration: 0.7s;
         &:hover {
-          width: 370px;
-          height: 255px;
+          width: 470px;
+          height: 455px;
         }
       }
       .touxiang {

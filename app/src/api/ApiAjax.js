@@ -5,10 +5,11 @@ import axios from "axios"
 // 1:利用axios对象方法create，去创建一个axios实例
 // 2:request就是axios，只不过稍微配置一下
 const requests = axios.create({
+    // header: { 'access_token': this.token }  //设置token
 
     //配置对象
     //基础路径，发请求的时候，路径当中会出现api
-    baseURL: "/api",
+    // baseURL: "/api",
 
     //代表请求超时的时间5s
     // timeout:5000
@@ -32,11 +33,11 @@ requests.interceptors.response.use(config => {
 }, reject => {
 
     // 弹出错误信息
-    alert(reject.message)
+    console.log(reject);
 
     //响应失败的回调函数，终止Promise链
     return new Promise();
-    
+
 })
 
 

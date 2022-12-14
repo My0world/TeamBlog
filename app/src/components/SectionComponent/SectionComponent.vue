@@ -2,10 +2,11 @@
   <div class="SectionComponent">
     <div class="title">
       <div style="width: 5px; height: 31px; background: red"></div>
-      <div>最新文章</div>
+      <div>{{title}}</div>
     </div>
     <ul>
-      <li>
+      <!--  -->
+      <li v-for="i in dataList" :key="i.id">
         <svg
           t="1670139451826"
           class="icon"
@@ -32,7 +33,7 @@
             fill="#4dac98"
           ></path>
         </svg>
-        <a title="星空">星空</a>
+        <a :title="i.title">{{i.title}}</a>
         <span class="score"
           ><svg
             t="1670072535750"
@@ -49,7 +50,7 @@
               p-id="2480"
               fill="#d81e06"
             ></path></svg
-          >99+</span
+          >{{i.score}}</span
         >
       </li>
     </ul>
@@ -60,6 +61,7 @@
 <script>
 export default {
   name: "SectionComponent",
+  props:['dataList','title'],
   data() {
     return {};
   },

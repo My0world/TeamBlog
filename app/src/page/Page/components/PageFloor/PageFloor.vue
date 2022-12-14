@@ -2,16 +2,12 @@
   <div class="PageFloor">
     <div class="container">
       <div class="img">
-        <el-image
-          class="cover"
-          :src="require('@/assets/2008030818/page/01.png')"
-          fit="cover"
-        ></el-image>
+        <el-image class="cover" :src="imageURL" fit="cover"></el-image>
       </div>
       <div class="content">
-        <p title="原型和原型链" class="title">原型和原型链</p>
+        <p :title="title" class="title">{{ title }}</p>
         <p class="text">
-          微信小程序是一种全新的连接用户与服务的方式，它可以在微信内被便捷地获取和传播，同时具有出色的使用体验。本文将从注册，到语法，到应用，深层次剖析小程序的使用。
+          {{ content }}
         </p>
         <div class="body">
           <div class="message">
@@ -33,7 +29,7 @@
                   p-id="2705"
                 ></path>
               </svg>
-              2022-12-03
+              {{ time }}
             </span>
             <span class="score"
               ><svg
@@ -51,7 +47,7 @@
                   p-id="2480"
                   fill="#d81e06"
                 ></path></svg
-              >2551</span
+              >{{ score }}</span
             >
             <span class="user">
               <svg
@@ -71,7 +67,7 @@
                   fill="#d4237a"
                 ></path>
               </svg>
-              梁庚大
+              {{ name }}
             </span>
           </div>
           <el-button class="button" type="success">立即查看</el-button>
@@ -85,6 +81,7 @@
 <script>
 export default {
   name: "PageFloor",
+  props: ["imageURL", "title", "content", "time", "score", "name"],
   data() {
     return {};
   },

@@ -1,12 +1,12 @@
 <template>
   <div class="SearchFloor">
-    <a title="原型和原型链">原型和原型链</a>
+    <a href="#" title="原型和原型链">{{title}}</a>
     <p>
-      一、前言在js中，原型和原型链是一个很重要的知识点，只有理解了它，我们才能更深刻的理解js，在这里，我们将分成几个部分来逐步讲解。二、构造函数构造函数和普通函数本质上没什么区别，只不过使用了new关键字创建对象的函数，被叫做了构造函数。构造函数的首字母一般是大写，用以区分普通函数，当然不大写也不会有什么错误。
+      {{content}}
     </p>
     <p>
       <span>点击量:</span
-      >2&nbsp;—&nbsp;文章&nbsp;—&nbsp;2022-12-3—&nbsp;<span>梁庚大</span>&nbsp;
+      >{{score}}&nbsp;—&nbsp;{{type}}&nbsp;—&nbsp;{{time}}—&nbsp;<span>{{name}}</span>&nbsp;
     </p>
   </div>
 </template>
@@ -15,6 +15,7 @@
 <script>
 export default {
   name: "SearchFloor",
+  props:['title',"content","score","type","time","name"],
   data() {
     return {};
   },

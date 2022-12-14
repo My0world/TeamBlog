@@ -3,10 +3,10 @@
     <div class="title">博客个人中心管理系统</div>
     <div class="main">
       <div class="loginForm">
-        <el-input v-model="user" placeholder="请输入账号"></el-input>
+        <el-input v-model="loginForm.stuId" placeholder="请输入账号"></el-input>
         <el-input
           placeholder="请输入密码"
-          v-model="password"
+          v-model="loginForm.password"
           show-password
         ></el-input>
       </div>
@@ -14,6 +14,7 @@
         <el-button @click="goLogin" type="success">登录</el-button>
       </div>
     </div>
+    <div v-show="false">{{getMineAllData(loginData.data)}}</div>
   </div>
 </template>
 
@@ -23,17 +24,36 @@ export default {
   name: "Login",
   data() {
     return {
-      user: "",
-      password: "",
+      loginForm: {
+        password: "",
+        stuId: "",
+      },
+      minedata:{}
     };
+  },
+  computed: {
+    loginData(){
+      return this.$store.state.Login;
+    }
   },
   components: {},
   methods: {
-    goLogin() {},
+    goLogin() {
+      this.loginForm.stuId = parseInt(this.loginForm.stuId);
+      this.$store.dispatch("Login/login", this.loginForm);
+    },
+    getMineAllData(v){
+      if(v==="登陆成功"){
+        this.$store.dispatch("Mine/getData", this.loginForm.stuId);
+        this.$store.dispatch("Mine/getUser", this.loginForm.stuId);
+        sessionStorage.setItem("stuId", this.loginForm.stuId);
+        this.$router.push({
+          name:"个人信息"
+        })
+      }
+    }
   },
-  mounted(){
-    this.$router.push({name:"个人信息"})
-  }
+  mounted() {},
 };
 </script>
 

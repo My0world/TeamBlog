@@ -1,7 +1,7 @@
 //axios
-import { reqGetSearchInfo, reqGetUser } from "@/api"
+import { reqHotList, reqGetUser } from "@/api"
 
-const search = {
+const page = {
     namespaced: true,
 
     //actions:处理action,可以手写自己的业务逻辑，也可以处理异步
@@ -9,12 +9,12 @@ const search = {
         // 这里可以书写业务逻辑，但是不能修改state
 
         //发送请求获取搜索结果
-        async getSearchList(context, value = "") {
+        async getHotList(context) {
 
-            let result = await reqGetSearchInfo(value)
+            let result = await reqHotList()
             if (result.code === 200) {
                 await context.dispatch('getUserList')
-                context.commit("GETSEARCHLIST", result.data)
+                context.commit("GETHOTLIST", result.data)
             }
         },
 
@@ -29,8 +29,8 @@ const search = {
 
     //mutations:修改state的唯一手段
     mutations: {
-        GETSEARCHLIST(state, value) {
-            state.searchList = value
+        GETHOTLIST(state, value) {
+            state.hotList = value
         },
         GETUSERLIST(state, value) {
             state.userList = value
@@ -39,7 +39,7 @@ const search = {
 
     //state:仓库存储数据的地方
     state: {
-        searchList: [],
+        hotList: [],
         userList: []
     },
 
@@ -47,18 +47,24 @@ const search = {
     getters: {
         resultList(state) {
             let result = {}
-            let reslist = []
-            for (let i = 0; i < state.searchList.length; i++) {
-                state.searchList[i].time = state.searchList[i].time.slice(0, 10)
+            let reslist1 = []
+            let reslist2 = []
+            for (let i = 0; i < state.hotList.length; i++) {
+                state.hotList[i].time = state.hotList[i].time.slice(0, 10)
                 let index = state.userList.findIndex(item => {
-                    return item.stuId === state.searchList[i].stuId
+                    return item.stuId === state.hotList[i].stuId
                 })
-                Object.assign(result, state.searchList[i], state.userList[index]);
-                reslist.push(result)
+                Object.assign(result, state.hotList[i], state.userList[index]);
+                reslist1.push(result)
                 result = {}
             }
-            return reslist
+            for (let i = 0; i < reslist1.length; i++) {
+                if (reslist1[i].type === '文章') {
+                    reslist2.push(reslist1[i])
+                }
+            }
+            return reslist2
         }
     },
 }
-export default search
+export default page
